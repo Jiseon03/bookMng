@@ -24,8 +24,13 @@ eGovFramework로 구축한 웹 애플리케이션으로, 독서 기록과 서평
 - **데이터베이스**: MySQL
 
 ---
-##📊 데이터베이스 설계 (ERD)
 
+
+## 📊 데이터베이스 설계 (ERD)
+![image (1)](https://github.com/user-attachments/assets/f3ec3650-f5c9-4bba-babc-93138b61b642)
+
+
+---
 
 ## 📖 설치 방법
 

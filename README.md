@@ -19,12 +19,22 @@ eGovFramework로 구축한 웹 애플리케이션으로, 독서 기록과 서평
 
 ## 🛠️ 기술 스택
 
-- **프론트엔드**: HTML, CSS, JavaScript
-- **백엔드**: eGovFramework, MyBatis, Java
-- **데이터베이스**: MySQL
+### 프레임워크
+- **eGovFramework** 3.10.0
+
+### 프론트엔드
+- **HTML** 5
+- **CSS** 3
+- **JavaScript**
+- **jQuery** 3.7.1
+
+### 백엔드
+- **Java** 17 (openjdk:17)
+
+### 데이터베이스
+- **MySQL** 8.0.33
 
 ---
-
 
 ## 📊 데이터베이스 설계 (ERD)
 ![image (1)](https://github.com/user-attachments/assets/f3ec3650-f5c9-4bba-babc-93138b61b642)

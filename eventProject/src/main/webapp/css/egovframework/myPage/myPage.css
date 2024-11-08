@@ -1,0 +1,233 @@
+@charset "UTF-8";
+.mypage-container{
+	box-sizing : border-box;
+	padding : 25px;
+	width : 60%;
+	border : 1px solid #ccc;
+	border-radius : 23px;
+	margin : 0px auto;
+}
+
+.profile-image-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;   
+    max-width: 1200px;
+    margin: 0 auto;
+}
+h1{
+	margin : 0px;
+	padding : 20px 0px;
+	
+}
+
+h1,h2{
+	text-align : center;
+}
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 350px; /* 화면의 세로를 꽉 채움 */
+}
+
+/* 프로필 이미지 */
+.profile-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    margin-bottom: 15px;
+    cursor : pointer;
+    box-shadow: 0 4px 13px rgba(0, 0, 0, 0.3); /* 그림자 효과 추가 */
+    transition: transform 0.4s ease, box-shadow 0.3s ease; /* 부드러운 전환 효과 */
+}
+.profile-image img:hover {
+    transform: scale(1.03); /* 이미지 크기 확대 */
+}
+.profile-name{
+	font-size : 18px;
+	font-weight : bold;
+	padding : 8px 0px;
+}
+
+
+.image-submit{
+	margin-top :10px;
+    border-radius: 5px;
+    padding: 5px 8px;
+    cursor : pointer;
+   
+}
+/* 닉네임 스타일 */
+.profile-nickname h2 {
+    margin: 10px 0;
+    font-size: 24px;
+    color: #333;
+}
+
+/* 프로필 이미지 업로드 버튼 */
+.custom-file-upload {
+    display: inline-block;
+    padding: 8px 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+
+
+/* 파일 입력 필드 숨기기 */
+input[type="file"] {
+    display: none;
+}
+
+/* 커스텀 파일 업로드 버튼 스타일 */
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #ff8080;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.custom-file-upload:hover {
+    background-color: #0056b3;
+}
+form {
+    background-color: #ffffff;
+    border-radius: 10px;
+    /*box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);*/
+    max-width: 550px;  /* 폼의 최대 너비 */
+    margin: 0px auto; /* 화면 중앙으로 정렬 (위-아래 여백 50px, 양옆 auto로 중앙 배치) */
+}
+
+/* 테이블 스타일: 너비를 100%로 설정 */
+table {
+    width: 100%;
+    border-spacing: 0;
+}
+td {
+    padding: 10px 0;
+    font-size: 16px;
+    color: #333;
+    font-weight : bold;
+}
+
+/* 텍스트 입력 필드 스타일 */
+input[type="text"], input[type="password"], input[type="date"] {
+    width: calc(100% - 20px); /* 버튼이나 셀렉트 박스와 같은 요소가 있는 경우 간격 조정 */
+    padding: 12px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+* 이메일과 셀렉트 박스를 감싸는 부모 컨테이너 */
+/* 이메일과 셀렉트 박스를 감싸는 부모 컨테이너 */
+.email-container {
+    display: flex;           /* Flexbox를 사용해 자식 요소를 한 줄로 정렬 */
+    justify-content: space-between; /* 자식 요소들이 공간을 나누어 차지하도록 함 */
+    align-items: center;     /* 세로 중앙 정렬 */
+    width: 100%;             /* 부모 요소의 너비를 100%로 설정 */
+}
+
+/* 이메일 입력 필드 스타일 */
+.email {
+    width: 65% !important  ;            /* 이메일 입력 필드의 너비를 70%로 설정 */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* 셀렉트 박스 스타일 */
+select {
+    width: 30%;              /* 셀렉트 박스의 너비를 30%로 설정 */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.button-wrap{
+	text-align : center;
+	margin : 10px 0;
+}
+
+/* 버튼 스타일 */
+input[type="button"] {
+    width: 125px
+    text-align : center;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 20px;
+    margin: 10px 0;
+    border: none;
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 3px;
+}
+
+input[type="button"]:hover {
+    background-color: var(--secondary-color);
+}
+
+/* 성별 라디오 버튼과 레이블 스타일 */
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+label {
+    margin-right: 15px;
+    font-size: 14px;
+}
+
+/* 중복 검사 버튼 스타일 */
+#btn_idChk {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 15px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#btn_idChk:hover {
+    background-color: #0056b3;
+}
+.delete_user{
+	display : inline-block;
+	margin : 0 auto;
+	cursor: pointer;
+	color : #b22222;
+	text-decoration: underline;
+}
+
+/* 반응형 디자인 */
+@media screen and (max-width: 600px) {
+    form {
+        padding: 20px;
+    }
+    input[type="text"], input[type="password"], input[type="date"], .email, select {
+        width: 100%;
+        margin: 5px 0;
+    }
+    #btn_idChk {
+        width: 100%;
+        margin: 10px 0 0;
+    }
+}
+

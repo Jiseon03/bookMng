@@ -1,0 +1,101 @@
+@charset "UTF-8";
+h2{
+	text-align : center;
+}
+.liked-books-container {
+    width: 90%;
+    margin: 0 auto;
+}
+* 검색 옵션 레이아웃 */
+.search-container {
+    margin: 30px 0;
+    display: flex;
+    justify-content: flex-end; /* 검색 부분을 오른쪽에 배치 */
+    align-items : center;
+    margin-right : 10px;
+}
+
+.search-options {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end; /* 검색 부분을 오른쪽에 배치 */
+    align-items: center;
+    gap: 10px;
+}
+
+.search-select,
+.search-input,
+.btn-search {
+    padding: 10px;
+    font-size: 13px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+
+
+.btn-search {
+    padding: 8px 16px;
+    background-color: #5b9bd5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-search:hover {
+    background-color: #4a86c5;
+}
+
+.total-like-count-container {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+/* 부모 컨테이너에 grid 설정 */
+.liked-book-list {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 한 줄에 6개씩 배치 */
+    gap: 35px; /* 각 항목 간 간격 설정 */
+    padding: 20px 0;
+    width: 100%; /* 부모 컨테이너가 가로로 꽉 차도록 설정 */
+    box-sizing: border-box;
+}
+
+.note-item {
+    text-align: center;   
+}
+
+
+
+/* 이미지 크기와 텍스트 정보 정렬 */
+.note-book-info .book-image {
+    width: 100%;
+    width: 150px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.note-book-info .book-image:hover {
+    transform: translateY(-5px);
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.book-text-info {
+    margin-top: 10px;
+}
+
+.book-text-info h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.book-text-info p {
+    font-size: 14px;
+    color: #666;
+}

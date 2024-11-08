@@ -1,0 +1,149 @@
+@charset "UTF-8";
+/* 좋아요한 도서 목록 전체 컨테이너 */
+h1{
+	text-align : center;
+}
+.mypage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+}
+
+/* 좋아요한 도서 목록 및 독서 노트 정보 박스 */
+.book-like ,.book-note{
+    width: 85%;
+    text-align: center;  
+    transition: transform 0.3s ease;
+    font-size : 20px;
+    font-weight : bold;   
+    padding : 20px;
+    box-sizing:border-box;
+}
+
+/* 좋아요한 도서 목록 컨테이너 */
+.list-wrap {
+	padding : 20px 0;
+    display: flex;
+    gap : 10px;
+    justify-content: flex-start;
+    border-top: 1px solid #ccc;
+}
+.book-detail-link{
+	width: 19%;
+}
+/* 개별 도서 아이템 */
+.book-item {
+    text-align: center;   
+    background-color: #ffffff;   
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.myInfo-title ,.myInfo-sub{
+	text-align : left;	
+	display : inline-block;
+}
+
+.myInfo-sub{
+	padding-left : 10px;
+}
+
+/* 도서 이미지 */
+.book-image {
+    width: 80%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 3px;
+    cursor : pointer;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+.book-image:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 그림자 효과 추가 */
+    transform: scale(1.04); /* 이미지 크기 확대 */
+}
+/* 도서 제목 */
+.book-title {
+    font-size: 17px;
+    color: #333;
+    font-weight: 700;
+    margin: 0; 
+    padding : 8px 0;
+}
+
+.book-author {
+	font-size: 13px;
+	color: #808080;
+}
+
+/* 좋아요 한 도서 개수와 '전체보기' 링크 */
+.myInfo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom : 5px;  
+}
+
+.view-all-link {
+	font-size:15px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: auto;
+}
+
+.view-all-link:hover {
+    text-decoration: underline;
+}
+
+/* 반응형 스타일 - 태블릿 크기 */
+@media (max-width: 1024px) {
+   
+    .list-wrap {
+        gap: 20px;
+    }
+    
+    
+}
+
+/* 반응형 스타일 - 모바일 크기 */
+@media (max-width: 768px) {
+    .mypage-container {
+        padding: 10px;
+    }
+    
+    .book-like, .book-note {
+        width: 100%;
+        font-size: 18px;
+    }
+    .list-wrap {
+        flex-direction: column;
+        align-items: center;
+    }
+    .book-item {
+        width: 50%; /* 한 줄에 하나씩 */
+        margin-bottom: 15px;
+    }
+    .book-detail-link {
+    	width: 30%;
+}
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px;
+    }
+    
+    .book-like, .book-note {
+        font-size: 16px;
+    }
+    .book-title {
+        font-size: 15px;
+    }
+    .book-author {
+        font-size: 12px;
+    }
+}

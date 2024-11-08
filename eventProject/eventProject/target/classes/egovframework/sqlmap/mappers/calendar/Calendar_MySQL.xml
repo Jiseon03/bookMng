@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CalendarDAO">
+
+	<select id="selectBookNotesForCalendar" parameterType="int" resultType="java.util.HashMap">
+	    SELECT n.note_start_date AS noteStartDate,
+	           n.note_end_date AS noteEndDate,
+	           n.note_idx AS noteIdx,
+	           b.book_image AS bookImage,
+	           b.book_title AS bookTitle,
+	           b.book_author AS bookAuthor
+	    FROM tb_book_note n
+	    JOIN tb_book b ON n.book_isbn = b.book_isbn
+	    WHERE n.user_idx = #{userIdx}
+	      AND n.note_use_yn = 'Y'
+	</select>	
+	
+	<!-- 월별 읽은 책 개수 쿼리 -->
+	<select id="getMonthlyReadBookCount" parameterType="java.util.HashMap" resultType="int">
+	    SELECT COUNT(*) 
+	    FROM tb_book_note 
+	    WHERE user_idx = #{userIdx}
+	      AND note_use_yn = 'Y'
+	      AND DATE_FORMAT(note_start_date, '%Y-%m') = #{yearMonth} <!-- 연-월 형식으로 필터링 -->
+	</select>
+	
+	<!-- 월별 관심 책 개수 쿼리 -->
+	<select id="getMonthlyLikeBookCount" parameterType="java.util.HashMap" resultType="int">
+	    SELECT COUNT(*) 
+	    FROM tb_book_like 
+	    WHERE user_idx = #{userIdx}
+	      AND DATE_FORMAT(like_date, '%Y-%m') = #{yearMonth} <!-- 연-월 형식으로 필터링 -->
+	</select>
+	
+	
+</mapper>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MainDAO">
+
+	<select id="selectIdChk" parameterType="java.util.HashMap" resultType="int">
+		SELECT count(1)
+		FROM tb_user
+		WHERE user_id = #{userId}
+	</select>
+	
+	<insert id="insertMember" parameterType="java.util.HashMap">
+	INSERT INTO tb_user
+	   (user_nickname,
+		user_id,
+		user_password,
+		user_email,
+		user_gender,
+		user_birth,
+		user_use_yn,
+		create_date,
+		update_date,
+		create_id,
+		update_id
+		)
+	VALUES (
+		#{userNickname},
+		#{userId},
+		#{userPw},
+		#{userEmail},
+		#{userGender},
+		#{userBirth},
+		'Y',
+		CURRENT_TIMESTAMP(),
+		CURRENT_TIMESTAMP(),
+		#{userId},
+		#{userId}
+	)
+	</insert>
+	
+	<select id="selectLoginInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT  user_idx AS userIdx,
+				user_id AS userId,
+				user_nickname AS userNickname,
+				user_birth AS userBirth,
+				user_email AS userEmail,
+				left(user_email, locate('@', user_email)-1) AS emailId,
+				substring(user_email, locate('@', user_email)+1) AS emailAddr,
+				user_use_yn AS userUseYn
+		FROM tb_user
+		WHERE user_id = #{userId}
+		AND user_password = #{userPw}
+		AND user_use_yn = 'Y'
+	</select>	
+	
+	<select id="selectFindId" parameterType="java.util.HashMap" resultType="String">
+		SELECT user_id
+		FROM tb_user
+		WHERE user_nickname = #{userNickName}
+		AND user_email = #{userEmail}
+		AND user_use_yn = 'Y'
+	</select>
+	
+	<select id="selectMemberCertification" parameterType="java.util.HashMap" resultType="int">
+		SELECT member_idx
+		FROM tb_user
+		WHERE member_id = #{memberId}
+		AND member_name = #{memberName}
+		AND member_email = #{memberEmail}
+	</select>
+	
+	<select id="selectMemberCertificationChk" parameterType="java.util.HashMap" resultType="int">
+		SELECT count(member_idx)
+		FROM tb_user
+		WHERE member_id = #{memberId}
+		AND member_name = #{memberName}
+		AND member_email = #{memberEmail}
+	</select>
+	
+	<update id="updatePwd" parameterType="java.util.HashMap">
+		UPDATE tb_user
+		SET member_pw = #{memberPw}
+		WHERE member_idx = #{memberIdx}
+	</update>
+	
+	<select id="getTopLikedBooks" resultType="java.util.HashMap">
+	    SELECT 
+	        b.book_image AS bookImage,
+	        b.book_isbn  AS bookIsbn,
+	        SUBSTRING_INDEX(b.book_title, '(', 1) AS bookTitle,
+	        b.book_author AS bookAuthor,
+	        COUNT(bl.book_isbn) AS likeCount
+	    FROM tb_book_like bl
+	    JOIN tb_book b ON bl.book_isbn = b.book_isbn
+	    GROUP BY bl.book_isbn
+	    ORDER BY likeCount DESC
+	    LIMIT 10
+	</select>
+	
+	<!-- 태그별 좋아요 순 상위 5개 도서 목록 조회 -->
+    <select id="selectTopBooksByTag" parameterType="String" resultType="java.util.HashMap">
+	    SELECT b.book_image AS bookImage, 
+	           SUBSTRING_INDEX(b.book_title, '(', 1) AS bookTitle,
+	           b.book_author AS bookAuthor,
+	           b.book_isbn AS bookIsbn
+	    FROM tb_book_note n
+	    JOIN tb_book b ON n.book_isbn = b.book_isbn
+	    WHERE n.note_tag = #{tag}
+	    GROUP BY bookTitle, b.book_image, b.book_author, b.book_isbn
+	    ORDER BY MAX(n.note_rating) DESC
+	    LIMIT 5
+	</select>
+
+</mapper>

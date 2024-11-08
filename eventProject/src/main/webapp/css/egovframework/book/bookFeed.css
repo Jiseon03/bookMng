@@ -1,0 +1,413 @@
+/* 전체 콘텐츠를 나란히 배치하는 컨테이너 */
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction : column;
+    margin-bottom: 20px;
+}
+
+/* 검색 옵션 레이아웃 */
+.search-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: flex-end; /* 검색 부분을 오른쪽에 배치 */
+    margin-right : 10px;
+}
+
+.search-options {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-select,
+.search-input,
+.btn-search {
+    padding: 10px;
+    font-size: 13px;
+    height: 40px;
+    border-radius: 5px;
+}
+.btn-search {
+    padding: 8px 16px;
+    background-color: #5b9bd5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-search:hover {
+    background-color: #4a86c5;
+}
+/* 노트 피드 레이아웃 */
+.feed-container {
+    flex: 3;
+}
+
+.note-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+.note-item {
+    display: flex; 
+    flex-direction: column;
+    justify-content : flex-start;
+    gap: 10px; /* 각 섹션 사이의 간격 */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 애니메이션 효과 */
+    
+}
+.note-item:hover {
+	 transform: scale(1.03); /* 크기 1.1배 확대 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.note-author {
+    display: flex;
+    align-items: center; /* 작성자 정보가 수평으로 정렬되도록 설정 */
+    gap: 10px; /* 프로필 이미지와 닉네임 사이의 간격 */
+    margin-bottom: 10px;
+    padding : 15px 20px 0px 20px;
+}
+
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* 이미지를 원형으로 만들기 */
+    overflow: hidden; /* 이미지를 자를 때 유용 */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* 이미지에 살짝 그림자 추가 */
+}
+
+.profileImgPreview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지가 원형 틀에 맞춰지도록 설정 */
+}
+
+.user-nickname {
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 5px; /* 닉네임과 시간 차이 사이에 약간의 간격 추가 */
+}
+
+.note-time {
+    font-size: 12px;
+    color: #888; /* 시간 차이 텍스트 색상 */
+}
+.note-content {
+	line-height: 1.5; /* 줄 간격을 넓게 */
+	text-align: justify; /* 텍스트 정렬을 양쪽 정렬로 설정 */
+	padding : 10px 30px;
+	height : 100px;
+	display : flex;
+	justify-content:center;
+	align-items : center;
+    background: linear-gradient(to right, rgba(255, 182, 193, 0.3), rgba(173, 216, 230, 0.3)); /* 연한 핑크와 연한 파란색 그라데이션 */
+    padding: 10px 20px; /* 내용물과 테두리 사이에 여백 */
+    font-size: 15px; /* 폰트 크기 */
+    color: #333; /* 텍스트 색상 */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* 살짝 그림자 효과 */
+}
+
+.note-book-info{
+	 padding : 7px 20px 12px 20px;
+	 display: flex;
+	 justify-content : space-between;
+     align-items: flex-start; /* 세로로 정렬 */
+     gap: 15px; /* 텍스트와 이미지 사이 간격 */
+     
+}
+.book-text-info {
+    display: flex;
+    flex-direction: column; /* 제목과 저자를 세로로 배치 */
+}
+
+.note-book-info h3 { 
+    font-size: 16px;
+    margin-bottom : 0px;
+}
+
+.note-book-info p {
+    font-size: 12px;
+    color: #666;
+}
+
+.book-image {
+    width: 70px;
+    height: auto;
+    border-radius: 5px;
+   
+}
+/* 그라데이션 색상 1 */
+.gradient-1 {
+    background: linear-gradient(to right, rgba(255, 182, 193, 0.3), rgba(173, 216, 230, 0.3)); /* 연한 핑크, 연한 파랑 */
+}
+
+/* 그라데이션 색상 2 - 연한 파스텔 노랑과 민트 */
+.gradient-2 {
+    background: linear-gradient(to right, rgba(255, 255, 160, 0.45), rgba(170, 255, 200, 0.45)); /* 연한 노랑, 연한 민트 */
+}
+
+/* 그라데이션 색상 3 - 연한 파스텔 파랑과 보라 */
+.gradient-3 {
+    background: linear-gradient(to right, rgba(150, 200, 255, 0.45), rgba(220, 170, 255, 0.45)); /* 연한 파랑, 연한 보라 */
+}
+
+/* 그라데이션 색상 4 - 연한 파스텔 주황과 살구 */
+.gradient-4 {
+    background: linear-gradient(to right, rgba(255, 190, 150, 0.45), rgba(255, 140, 100, 0.45)); /* 연한 주황, 연한 살구 */
+}
+
+/* 그라데이션 색상 5 - 연한 파스텔 하늘색과 아이보리 */
+.gradient-5 {
+    background: linear-gradient(to right, rgba(220, 240, 255, 0.45), rgba(250, 220, 180, 0.45)); /* 연한 하늘색, 연한 아이보리 */
+}
+.star i {
+    font-size: 20px;
+    color: #ccc; /* 기본 별 색상 */
+    cursor: pointer;
+}
+
+.star i.selected {
+    color: #ffcc00; /* 선택된 별 색상 */
+}
+/* 모달 배경 */
+/* 모달 전체 배경 */
+.modal {
+    display: none;  /* jQuery로 fadeIn/fadeOut할 때만 보이게 설정 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* 모달 콘텐츠 */
+.feed-modal-content {
+    position: relative;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%) scale(0.95); /* 처음엔 살짝 축소된 상태 */
+    width: 60%;
+    max-width: 600px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+/* 별점 스타일 */
+.modal-star-rating {
+    display: flex;
+    align-items: center;       
+}
+
+.modal-star-rating i {
+    font-size: 18px;
+    color: #FFD700; /* 별 색상을 노란색으로 지정 */
+    margin-right: 2px; /* 별 사이 간격 */
+}
+/* 닫기 버튼 */
+.close {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+/* 이전, 다음 버튼 스타일 */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 28px; /* 아이콘 크기를 조정 */
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    outline: none;
+    border-radius: 50%; /* 원형 버튼 */
+    transition: background-color 0.3s ease;
+}
+
+/* 호버 시 배경 색상 변경 */
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.prev {
+    left: -60px; /* 화면의 가장자리에 맞게 위치 조정 */
+}
+
+.next {
+    right: -60px;
+}
+
+/* 반응형 - 작은 화면에서 버튼 크기와 위치 조정 */
+@media (max-width: 768px) {
+    .prev, .next {
+        font-size: 24px;
+        padding: 8px 12px;
+    }
+}
+
+
+/* 사용자 정보 */
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-nickname {
+    font-weight: bold;
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.note-time {
+    font-size: 0.85rem;
+    color: #999;
+    margin-left: auto;
+}
+
+/* 노트 내용 */
+.note-content-full {
+	background-color: #fafafa; /* 가벼운 배경색 추가 */
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    border-bottom :1px solid #ccc;
+    padding: 20px 15px; /* 상하 패딩 추가 */
+    text-align: justify; /* 텍스트 정렬을 양쪽 정렬로 설정 */
+    border-radius: 5px; /* 코너에 약간의 곡선 추가 */
+    margin-bottom : 10px;
+    max-height: 220px; /* 원하는 고정 높이 설정 */
+    overflow-y: auto; /* 높이를 넘는 내용에 대해 세로 스크롤 활성화 */
+   
+}
+.book-detail-link{
+	cursor:pointer;
+}
+/* 책 정보 */
+.book-info {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+#modalBookTitle{
+	font-size : 18px;
+}
+#modalBookImage {
+    width: 100px;
+    height: 140px;
+    object-fit: cover;
+    margin-right: 15px;
+    border-radius: 3px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+    margin-right : 15px;
+}
+
+#modalBookImage:hover{
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 그림자 효과 추가 */
+    transform: scale(1.04); /* 이미지 크기 확대 */
+}
+.book-details{
+	padding : 5px;
+}
+.book-details h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.book-details p {
+    font-size: 1rem;
+    color: #777;
+}
+.star-wrap{
+	display : flex;
+	gap : 10px;
+}
+.modalNoteTag {
+	display : inline-block;
+    padding: 7px 12px;
+    margin: 5px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 7px;
+    transition: all 0.3s ease-in-out;
+    font-weight : bold;
+}
+/* 반응형 레이아웃 - 태블릿 (한 줄에 3개) */
+@media (max-width: 1024px) {
+	h1{
+		text-align : center;
+		font-size : 30px;
+	}
+    .note-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+     .search-container{
+     	justify-content: center; /* 검색 부분을 오른쪽에 배치 */
+    }
+    .search-options {
+    	gap: 5px;
+	}
+    
+   
+}
+
+/* 반응형 레이아웃 - 휴대폰 (한 줄에 1개) */
+@media (max-width: 768px) {
+    .note-grid {
+        grid-template-columns: 1fr; /* 한 줄에 1개 */
+        
+    }
+    .search-select,
+	.search-input,
+	.btn-search {
+	    padding: 6px;
+	    font-size: 13px;
+	    height: 35px;
+	    border-radius: 5px;
+	}
+	.star-select{
+		display :none;
+	}
+    .feed-modal-content {
+        width: 70%;
+        padding: 15px;
+    }
+}

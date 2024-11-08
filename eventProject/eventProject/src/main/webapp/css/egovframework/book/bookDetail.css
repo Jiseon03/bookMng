@@ -1,0 +1,224 @@
+*{
+    box-sizing: border-box;
+}
+
+
+.book-info{
+	box-sizing: border-box;
+	position: relative;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.img-box {
+	box-sizing: border-box;
+    position: relative;
+    width: 40%;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* 이미지가 박스 밖으로 넘치지 않도록 설정 */
+    border-radius: 10px;
+    min-width :250px;
+}
+
+
+/* 실제 책 이미지 스타일 */
+.book-image {
+    position: relative;
+    width: 190px;
+    z-index: 1; /* 블러 처리된 배경 위에 책 이미지가 나타나도록 설정 */
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+.title-box{
+	display : flex;
+	flex-direction : column;
+	align-items : flex-start;
+	justify-content:space-between;
+	box-sizing: border-box;
+    width: 60%;
+    border: 2px #BFBFBF solid;
+    padding: 30px;
+    border-radius: 10px;
+    min-width :500px;
+}
+.book-title{
+	margin-bottom : 12px;
+}
+
+.book-author{
+	font-size : 18px;
+}
+.public-box {
+    display: flex;
+    align-items: center;
+    color : #495057
+}
+
+.book-publisher::after {
+    content: "\2022"; /* 점 모양 유니코드 */
+    font-size: 14px;
+    margin: 0 8px;
+    color: #666; /* 점 색상 설정 */
+}
+
+/* 버튼들과 좋아요 버튼을 감싸는 컨테이너 */
+.button-container {
+	width : 100%;
+	font-weight : 600;
+    display: flex;
+    justify-content: flex-start; /* 버튼들이 나란히 정렬 */
+    align-items: end;
+    gap: 25px;
+    padding-top: 10px;
+    border-top: 2px solid #ddd; /* 위쪽에 선 추가 */
+    margin-top: 20px; /* 위쪽 여백 추가 */
+    padding-top: 30px; /* 버튼과 선 사이에 약간의 패딩 */
+}
+
+/* 각 버튼 디자인 (기존 스타일) */
+.note-btn{
+    padding: 15px 18px;
+    background-color: #B4CBD9;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+
+/* 좋아요 버튼 디자인 */
+.like-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    
+}
+.like-count{
+	display : inline-block;
+	padding-left : 10px;
+}
+/* 좋아요 하트의 기본 스타일 */
+.like-btn i {
+    font-size: 26px;
+    color: #ff4500; /* 기본 하트 색상 */
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out; /* 크기 및 색상 전환 애니메이션 */
+    cursor: pointer;
+}
+
+/* 하트가 채워졌을 때의 스타일 */
+.like-btn i.fas {
+    color: #ff4500; /* 채워진 하트의 색상 */
+}
+
+/* 하트를 클릭할 때 크기 변화 애니메이션 */
+.animate-like {
+    transform: scale(1.2); /* 하트가 커지는 효과 */
+}
+
+
+.book-detail-wrap{
+	width:100%;
+	padding : 5px;
+	margin-bottom : 30px;
+}
+
+.book-content-title{
+	font-size : 22px;
+	font-weight : bold;
+	padding : 0px !important;
+	margin-top : 25px;
+}
+
+.book-content{
+	padding-top:  20px;
+	text-align : left;
+	line-height : 1.6;
+	border-top : 1px solid #BFBFBF;
+}
+
+
+.book-content a {
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.book-content a:hover {
+    color: #0056b3;
+}
+
+.book-info-title{
+	font-size : 22px;
+	font-weight : bold;
+	margin: 25px 0px;
+	border-bottom : 1px solid #BFBFBF;
+	padding-bottom : 10px;
+}
+.book-discount,.book-isbn,.book-link{
+	display : flex;
+	justify-content : flex-start;
+	padding-bottom : 20px;
+}
+.title{
+	margin-right : 30px;
+	color : #656A73;
+	font-size : 18px;
+}
+.book-link{
+	
+    font-size : 17px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration : underline;      
+}
+.star-rating {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.star {
+    position: relative;
+    color: #ddd;
+    font-size: 20px;
+}
+
+.star .fa-star {
+    color: #ffc107;
+}
+
+.star-filled {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.star-empty {
+    color: #ddd;
+}
+
+.star-score {
+	margin-left : 5px;
+    font-size: 15px;
+    color: #333;
+}
+
+.no-rating-message {
+    color: #666;
+    font-size: 16px;
+}

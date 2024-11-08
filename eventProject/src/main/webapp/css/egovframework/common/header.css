@@ -1,0 +1,222 @@
+@charset "UTF-8";
+body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+    
+    .header-wrap {
+    	box-sizing: border-box;
+     	margin: 0 auto;
+    	width: 80%;
+    	height:80px;
+    	margin: 0 auto; /* 페이지 중앙 정렬 */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
+        transition: all 0.3s ease;
+    }
+    /* 스크롤 시 고정 스타일 */
+	.fixed-header {
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    width: 100%;
+	    max-width: 100%;
+	    padding: 0 11%;
+	    height: 80px;
+	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	    z-index: 1000;
+	    background-color: #fff;
+	}
+	
+	form {
+	    margin: 0;
+	}
+	
+	.search-section {
+	    height: 100%;
+	    display: flex;
+	    justify-content: flex-end;
+	    align-items: center;
+	}
+
+	.header-search-form {
+	    display: flex;
+	    align-items: center;
+	    position: relative; /* 아이콘 위치를 위해 부모에 상대 위치 지정 */
+	}
+	
+	/* 입력 필드 스타일 */
+	.header-search-form input[type="text"] {
+	    width: 320px; /* 너비 설정 */
+	    height: 25px;
+	    font-size: 15px;
+	    border: 1px solid #ddd;
+	    border-radius: 13px;
+	    padding: 7px 13px;
+	    margin-right: 5px; /* 버튼과의 간격 */
+	    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	    transition: border-color 0.3s;
+	}
+	
+	/* 입력 필드 포커스 시 효과 */
+	.header-search-form input[type="text"]:focus {
+	    border-color: #007bff;
+	    outline: none;
+	}
+	
+	/* 아이콘 스타일 */
+	.search-icon {
+	    position: absolute;
+	    right: 10px; /* 입력 필드 오른쪽에 위치 */
+	    top: 50%;
+	    transform: translateY(-50%);
+	    background: none;
+	    border: none;
+	    cursor: pointer;
+	    color: grey;
+	    font-size: 18px;
+	    transition: all 0.3s ease-in-out;
+	}
+	
+	.search-icon:active {
+	     color: #007BFF;
+	}
+
+	
+    .left-section {
+        display: flex;
+        align-items: center;
+    }
+    
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #3b2924;
+        text-decoration: none;
+        margin-right: 30px;
+    }
+     .page-menu a {
+        margin-right: 20px;
+        text-decoration: none;
+        color: #333;
+        font-size: 18px;
+    }
+    
+    .page-menu a:hover {
+        color: #007BFF;
+    }
+    
+    .page-menu a.active {
+    font-weight: bold;
+    color: #0056b3; /* 원하는 강조 색상으로 변경 */
+}
+   /* 햄버거 메뉴 아이콘 */
+.hamburger-menu {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 24px;
+    height: 18px;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    transition: 0.3s;
+} 
+    .auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* 로그인/회원가입 버튼과 햄버거 메뉴 사이 간격 */
+}
+    .auth-buttons a {
+        margin-left: 15px;
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+    }
+    
+    .auth-buttons a:hover {
+        color: #007BFF;
+    }
+    
+    .page-menu a.active {
+	    font-weight: bold;
+	    color : #2f4f4f;	   
+	}
+
+/* 태블릿 이하 크기에서 햄버거 메뉴 아이콘 표시 */
+@media (max-width: 1024px) {
+    .page-menu {
+        display: none; /* 태블릿 이하 크기에서 숨기기 */
+    }
+    .hamburger-menu {
+        display: flex; /* 태블릿 이하 크기에서 햄버거 아이콘 보이기 */
+        margin-left: 15px;
+    }
+
+    /* 모달 메뉴 스타일 */
+    .menu-modal {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .modal-content {
+      	width : 50%;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 400px;
+        text-align: center;
+        position: relative;
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .modal-menu a {
+        display: block;
+        font-size: 18px;
+        color: #333;
+        padding: 12px 0;
+        text-decoration: none;
+        border-bottom: 1px solid #eee;
+        transition: all 0.4s ease-in-out;
+    }
+    .modal-menu a:hover {
+       font-weight : bold;
+       color: var(--secondary-color);
+    }
+
+    .modal-menu a:last-child {
+        border-bottom: none;
+    }
+}
+@media (max-width: 768px){
+	.search-section{
+		display : none;
+	}
+}

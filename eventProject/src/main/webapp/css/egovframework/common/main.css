@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+:root {
+    --primary-color: #B4CBD9;
+    --secondary-color: #778899;
+    --text-color: #333333;
+    --background-color: #f8f9fa;
+    --active-color: #0056b3;  /* 활성화 상태 색상 */
+}
+body {
+	font-family: 'Roboto', sans-serif;
+	width : 100%;
+	box-sizing: border-box;
+    margin: 0;
+    
+}
+button{
+	background-color: #B4CBD9;
+}
+.container {
+    width: 80%;
+    margin: 0 auto; /* 페이지 중앙 정렬 */
+    padding: 20px 0; /* 위아래 여백 */
+}
+a{
+	text-decoration: none;
+    color: #000;
+}
+.content {
+    /* 콘텐츠 영역 스타일을 여기에 추가 */
+}
+
+

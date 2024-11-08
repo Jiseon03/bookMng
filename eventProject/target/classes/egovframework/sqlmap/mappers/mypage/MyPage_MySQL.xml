@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MyPageDAO">
+	
+	
+	<update id="updateProfileImage">
+	    UPDATE tb_user
+	    SET user_profile_image = #{fileName},
+	        update_date = NOW()
+	    WHERE user_idx = #{userIdx}
+	</update>
+	
+	<select id="getProfileImagePath" resultType="string" parameterType="int">
+	    SELECT user_profile_image
+	    FROM tb_user
+	    WHERE user_idx = #{userIdx}
+	</select>
+	
+	<update id="updateProfile" parameterType="java.util.HashMap">
+		UPDATE tb_user
+		SET user_nickname = #{userNickname},
+			user_id = #{userId},
+			user_email = #{userEmail},
+			user_birth =  #{userBirth}
+		WHERE user_idx = #{userIdx}
+	</update>
+    
+    <!-- 사용자 정보 조회 쿼리 -->
+    <select id="getUserInfoById" parameterType="int" resultType="java.util.HashMap">
+        SELECT  user_idx AS userIdx, 
+	            user_nickname AS userNickname, 
+	            user_profile_image, 
+	            user_id AS userId, 
+	            user_email AS userEmail, 
+	            left(user_email, locate('@', user_email)-1) AS emailId,
+				substring(user_email, locate('@', user_email)+1) AS emailAddr,
+	            user_birth AS userBirth, 
+	            user_use_yn AS userUseYn, 
+	            create_date, 
+	            update_date
+        FROM    tb_user
+        WHERE 	user_idx = #{userIdx} 
+    </select>
+    
+    <!-- 회원 탙ㄹ토 -->
+	<update id="deleteUser" parameterType="int">
+		UPDATE tb_user
+		SET user_use_yn = 'N'			
+		WHERE user_idx = #{userIdx}
+	</update>
+</mapper>

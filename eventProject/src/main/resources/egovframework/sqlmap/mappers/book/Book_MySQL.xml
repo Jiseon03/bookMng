@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tb_book">
+     <select id="countByIsbn" resultType="int">
+        SELECT COUNT(*) FROM tb_book WHERE book_isbn = #{isbn}
+    </select>
+
+    <insert id="insertBook">
+        INSERT INTO tb_book (book_title, book_author, book_publisher, book_pubdate, 
+                          book_isbn, book_discount, book_description, book_image , book_link)
+        VALUES (#{title}, #{author}, #{publisher}, #{pubdate}, #{isbn}, 
+                #{discount}, #{description}, #{image} ,#{link})
+    </insert>
+    
+    <select id="selectBookDetail" resultType="egovframework.com.book.domain.BookItem">
+	    SELECT book_title AS title,
+	           book_author AS author,
+	           book_publisher AS publisher,
+	           book_pubdate AS pubdate,
+	           book_isbn AS isbn,
+	           book_discount AS discount,
+	           book_description AS description,
+	           book_image AS image,
+	           book_link AS link
+	    FROM tb_book
+	    WHERE book_isbn = #{isbn}
+	</select>
+
+    <!-- 독서노트 등록 -->
+    <insert id="insertBookNote">
+        INSERT INTO tb_book_note 
+	        	   (user_idx, 
+	        		book_isbn, 
+	        		note_start_date,
+	         		note_end_date,
+	          		note_content,
+	           		note_create_date,
+	            	note_show_yn,
+	            	note_rating,
+	            	note_tag)
+	        VALUES (#{userIdx}, 
+			        #{bookIsbn}, 
+			        #{bookStartDate}, 
+			        #{bookEndDate}, 
+			        #{noteContent}, 
+			        NOW(), 
+			        #{noteShowYn},
+			        #{noteRating},
+			        #{selectedTag}
+        			)
+    </insert>
+	<!-- 독서 피드에서 쓸 정보 가져오기 -->
+	<select id="getBookNoteDetails" resultType="java.util.HashMap">
+	    SELECT  bn.note_content,     -- 독서 노트 내용
+	            bn.note_start_date,  -- 독서 시작 날짜
+	            bn.note_end_date,    -- 독서 종료 날짜
+	            bn.note_create_date,  -- 독서노트 생성 날짜
+	            bn.note_update_date,  -- 독서노트 수정 날짜
+	            bn.note_rating,
+	            bn.note_tag,
+	            u.user_nickname,     -- 사용자 닉네임
+	            u.user_profile_image,
+	            b.book_title,        -- 책 제목
+	            SUBSTRING_INDEX(book_title, '(', 1) AS short_book_title,
+	            b.book_author,       -- 책 저자
+	            b.book_image,
+	            b.book_isbn
+	    FROM tb_book_note bn
+	    JOIN tb_user u ON bn.user_idx = u.user_idx
+	    JOIN tb_book b ON bn.book_isbn = b.book_isbn
+	    WHERE bn.note_show_yn = 'Y'
+	    AND bn.note_use_yn = 'Y'
+	    <if test="searchKeyword != '' and searchKeyword != null">
+	        <if test="searchCondition == 'book_title'">
+	            AND b.book_title LIKE CONCAT('%', #{searchKeyword}, '%')   <!-- 책 제목 검색 -->
+	        </if>
+	        <if test="searchCondition == 'book_author'">
+	            AND b.book_author LIKE CONCAT('%', #{searchKeyword}, '%')  <!-- 작가 이름 검색 -->
+	        </if>
+	    </if>
+	    <!-- 별점 필터링: 별점이 선택된 경우에만 조건을 추가 -->
+	    <if test="noteRating != '' and noteRating != null">
+	        AND bn.note_rating = #{noteRating}
+	    </if>
+	    ORDER BY bn.note_create_date DESC  <!-- 최신 날짜 기준 내림차순 정렬 -->
+	</select>
+	<select id="getBookNoteCount" resultType="int" parameterType="int">
+        SELECT COUNT(*)
+        FROM tb_book_note
+        WHERE user_idx = #{userIdx}
+        AND note_use_yn = 'Y'
+    </select>
+    
+    <select id="selectMyBookNotes" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	    SELECT 
+	        @ROWNUM := @ROWNUM + 1 AS rnum,
+	        bn.note_idx AS noteIdx,
+	        b.book_title AS bookTitle,
+	        b.book_image AS bookImage,
+	        b.book_author AS bookAuthor,
+	        bn.note_content AS noteContent,
+	        DATE_FORMAT(bn.note_start_date, '%Y-%m-%d') AS noteStartDate,
+	        DATE_FORMAT(bn.note_end_date, '%Y-%m-%d') AS noteEndDate,
+	        DATE_FORMAT(bn.note_create_date, '%Y-%m-%d %H:%i:%s') AS noteCreateDate,
+	        CASE 
+	            WHEN bn.note_show_yn = 'Y' THEN '공개'
+	            WHEN bn.note_show_yn = 'N' THEN '비공개'
+        	END AS noteShowYn
+	    FROM tb_book_note bn
+	    JOIN tb_book b ON bn.book_isbn = b.book_isbn
+	    CROSS JOIN (SELECT @ROWNUM := 0) R  <!-- rnum 초기화 -->
+	    WHERE bn.user_idx = #{userIdx}  <!-- 로그인된 사용자 ID -->
+	    AND bn.note_use_yn = 'Y'
+	    <if test="searchKeyword != '' and searchKeyword != null">
+	   			<if test="searchCondition == 'book_title'">
+					AND b.book_title LIKE CONCAT('%', #{searchKeyword}, '%')   <!-- 책 제목 검색 -->
+				</if>
+				<if test="searchCondition == 'book_author'">
+					AND b.book_author LIKE CONCAT('%', #{searchKeyword}, '%')  <!-- 작가 이름 검색 -->
+				</if>
+	    </if>
+	    ORDER BY bn.note_create_date ASC  
+	</select>
+	
+	<select id="countMyBookNotes" parameterType="java.util.HashMap" resultType="int">
+	    SELECT 
+	        COUNT(*) 
+	    FROM tb_book_note bn
+	    JOIN tb_book b ON bn.book_isbn = b.book_isbn
+	    CROSS JOIN (SELECT @ROWNUM := 0) R  <!-- rnum 초기화 -->
+	    WHERE bn.user_idx = #{userIdx}  <!-- 로그인된 사용자 ID -->
+	    AND bn.note_use_yn = 'Y'
+	    <if test="searchKeyword != '' and searchKeyword != null">
+	   			<if test="searchCondition == 'book_title'">
+					AND b.book_title LIKE CONCAT('%', #{searchKeyword}, '%')   <!-- 책 제목 검색 -->
+				</if>
+				<if test="searchCondition == 'book_author'">
+					AND b.book_author LIKE CONCAT('%', #{searchKeyword}, '%')  <!-- 작가 이름 검색 -->
+				</if>
+	    </if>
+	    ORDER BY bn.note_create_date DESC
+	</select>
+	
+	<select id="selectBookNoteDetail" parameterType="int"  resultType="java.util.HashMap" >
+        SELECT 
+            note_idx AS noteIdx,
+            user_idx AS userIdx,
+            book_isbn AS bookIsbn,
+            note_start_date AS noteStartDate,
+            note_end_date AS noteEndDate,
+            note_content AS noteContent,
+            DATE_FORMAT(note_create_date, '%Y-%m-%d %H:%i:%s') AS noteCreateDate,  -- 밀리세컨드 제거
+        	DATE_FORMAT(note_update_date, '%Y-%m-%d %H:%i:%s') AS noteUpdateDate,  -- 밀리세컨드 제거
+            note_show_yn AS noteShowYn,
+            note_rating AS noteRating,
+            note_tag AS noteTag
+        FROM 
+            tb_book_note
+        WHERE 
+            note_idx = #{noteIdx}
+        AND note_use_yn = 'Y'
+    </select>
+    <!-- 책 정보 가져오기 -->
+    <select id="selectBookInfo" resultType="java.util.HashMap">
+	    SELECT book_title AS title,
+	           book_author AS author,
+	           book_publisher AS publisher,
+	           book_pubdate AS pubdate,
+	           book_isbn AS isbn,
+	           book_discount AS discount,
+	           book_description AS description,
+	           book_image AS image,
+	           book_link AS link
+	    FROM tb_book
+	    WHERE book_isbn = #{isbn}
+	</select>
+	<!-- 독서노트 수정 -->
+	<update id="updateBookNote" parameterType="java.util.HashMap">
+	    UPDATE tb_book_note
+	    SET
+	        note_start_date = #{noteStartDate},
+	        note_end_date = #{noteEndDate},
+	        note_content = #{noteContent},
+	        note_update_date = CURRENT_TIMESTAMP,  <!-- 현재 시간으로 수정 -->
+	        note_show_yn = #{noteShowYn},
+	        note_rating = #{noteRating},
+	        note_tag = #{selectedTag}
+	    WHERE 
+	        note_idx = #{noteIdx}
+	</update>
+	<!-- 독서노트 삭제 -->
+	<update id="deleteBookNote" parameterType="java.util.HashMap">
+	    UPDATE tb_book_note
+	    SET 
+	        note_use_yn = 'N',
+	        note_update_date = CURRENT_TIMESTAMP  <!-- 수정 날짜를 현재 시간으로 업데이트 -->
+	    WHERE 
+	        note_idx = #{noteIdx}
+	</update>
+	<!-- -좋아요-관련- -->
+	<!-- 좋아요 추가 -->
+	<insert id="insertLike" parameterType="java.util.HashMap">
+	    INSERT INTO tb_book_like (user_idx, book_isbn, like_date)
+	    VALUES (#{userIdx}, #{isbn}, NOW())
+	</insert>
+	
+	<!-- 좋아요 취소 -->
+	<delete id="deleteLike" parameterType="java.util.HashMap">
+	    DELETE FROM tb_book_like
+	    WHERE user_idx = #{userIdx} 
+	    AND book_isbn = #{isbn}
+	</delete>
+	
+	<!-- 사용자가 해당 책에 좋아요를 눌렀는지 확인 -->
+	<select id="checkUserLiked" parameterType="java.util.HashMap" resultType="int">
+	    SELECT COUNT(*) FROM tb_book_like
+	    WHERE user_idx = #{userIdx} 
+	    AND book_isbn = #{isbn}
+	</select>
+	
+	<!-- 책의 좋아요 개수 조회 -->
+	<select id="selectLikeCountByBook" parameterType="string" resultType="int">
+	    SELECT COUNT(*) FROM tb_book_like
+	    WHERE book_isbn = #{isbn}
+	</select>
+	
+	<select id="getLikedBooks" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	    SELECT 
+	        b.book_isbn AS bookIsbn,
+	        SUBSTRING_INDEX(b.book_title, '(', 1) AS bookTitle, 
+	        b.book_author AS bookAuthor,
+	        b.book_publisher AS bookPublisher,
+	        b.book_pubdate AS bookPubDate,
+	        b.book_image AS bookImage,
+	        MAX(bl.like_date) AS likeDate  -- 최신 좋아요 날짜 사용
+	    FROM tb_book_like bl
+	    JOIN tb_book b ON bl.book_isbn = b.book_isbn
+	    LEFT JOIN tb_book_note bn ON bn.book_isbn = b.book_isbn  <!-- INNER JOIN으로 변경하여 필터를 강제 적용 -->
+	    WHERE bl.user_idx = #{userIdx}  <!-- 로그인된 사용자 ID로 필터링 -->
+	      <if test="searchKeyword != '' and searchKeyword != null">
+	            <if test="searchCondition == 'book_title'">
+	                AND b.book_title LIKE CONCAT('%', #{searchKeyword}, '%')   <!-- 책 제목 검색 -->
+	            </if>
+	            <if test="searchCondition == 'book_author'">
+	                AND b.book_author LIKE CONCAT('%', #{searchKeyword}, '%')  <!-- 작가 이름 검색 -->
+	            </if>
+	      </if>
+	      <if test="tagSelect != null and tagSelect != ''">
+	            AND bn.note_tag = #{tagSelect}   <!-- 태그 필터 추가 -->
+	      </if>
+	    GROUP BY b.book_isbn  -- ISBN별로 그룹화하여 중복 제거
+	    ORDER BY likeDate DESC;  -- 좋아요한 날짜 순으로 정렬
+	</select>
+
+	
+	<select id="selectAvgRating" parameterType="String" resultType="double">
+	    SELECT ROUND(AVG(note_rating), 1) AS averageRating
+	    FROM tb_book_note
+	    WHERE book_isbn = #{isbn}
+	</select>
+
+	
+	
+	
+	
+	
+	
+</mapper>

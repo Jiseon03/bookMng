@@ -1,0 +1,68 @@
+@charset "UTF-8";
+form {
+	width : 40%;
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 22px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 550px;  /* 폼의 최대 너비 */
+    margin: 50px auto; /* 화면 중앙으로 정렬 (위-아래 여백 50px, 양옆 auto로 중앙 배치) */
+    padding : 40px 0;
+}
+
+/* 테이블 스타일: 너비를 100%로 설정 */
+table {
+    width: 100%;
+    border-spacing: 0;
+}
+
+/* 제목 스타일 */
+h1 {
+	font-size : 34px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* 각 입력 필드의 레이블 스타일 */
+td {
+    padding: 10px 0;
+    font-size: 16px;
+    color: #333;
+    font-weight : bold;
+    text-align : center;
+}
+
+/* 텍스트 입력 필드 스타일 */
+input[type="text"], input[type="password"]{
+    width: 60%; /* 버튼이나 셀렉트 박스와 같은 요소가 있는 경우 간격 조정 */
+    padding: 15px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+
+/* 버튼 스타일 */
+.btn_find{
+    width: 22%;
+    text-align : center;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="button"]:hover {
+    background-color: var(--secondary-color);
+     transform: translateY(-3px);
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

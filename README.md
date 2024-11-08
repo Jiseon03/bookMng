@@ -1,4 +1,4 @@
-# 📚 북 관리 프로젝트 (Book Management Project)
+# 📚 도서 관리 프로젝트 (Book Management Project)
 
 eGovFramework로 구축한 웹 애플리케이션으로, 독서 기록과 서평을 관리할 수 있는 기능을 제공합니다. 책을 사랑하는 사람들이 자신의 독서 여정을 쉽게 관리할 수 있도록 도와줍니다.
 
@@ -38,7 +38,6 @@ eGovFramework로 구축한 웹 애플리케이션으로, 독서 기록과 서평
 
 ## 📊 데이터베이스 설계 (ERD)
 ![image (1)](https://github.com/user-attachments/assets/f3ec3650-f5c9-4bba-babc-93138b61b642)
-
 
 ---
 

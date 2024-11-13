@@ -95,7 +95,7 @@
 	    SELECT 
 	        @ROWNUM := @ROWNUM + 1 AS rnum,
 	        bn.note_idx AS noteIdx,
-	        b.book_title AS bookTitle,
+	        SUBSTRING_INDEX(b.book_title, '(', 1) AS bookTitle, 
 	        b.book_image AS bookImage,
 	        b.book_author AS bookAuthor,
 	        bn.note_content AS noteContent,

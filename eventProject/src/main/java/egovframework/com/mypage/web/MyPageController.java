@@ -63,7 +63,7 @@ public class MyPageController {
 	    
 	    // 파일 업로드 서비스 호출
 	    String profileImagePath = MyPageService.uploadProfileImage(file, userIdx);
-	    
+	    System.out.println("profileImagePath>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+profileImagePath);
 	    if (profileImagePath != null) {
 	    	// 세션에 프로필 이미지 경로를 추가
 	        session.setAttribute("profileImagePath", profileImagePath);

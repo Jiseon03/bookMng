@@ -52,7 +52,7 @@ h1{
 /* 도서 이미지 */
 .book-image {
     width: 80%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
     border-radius: 3px;
     cursor : pointer;

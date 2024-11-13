@@ -141,7 +141,7 @@
                 <colgroup>
                     <col width="5%"/>
                     <col width="auto"/>
-                    <col width="10%"/>
+                    <col width="15%"/>
                     <col width="15%"/>
                     <col width="5%"/>
                 </colgroup>

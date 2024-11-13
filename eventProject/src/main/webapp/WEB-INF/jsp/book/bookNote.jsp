@@ -138,87 +138,72 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-	<c:if test="${not empty bookList}">
-    <c:forEach var="book" items="${bookList}">
-        
-            <h1 class="note-title">독서 노트 작성하기</h1>
-            <p class="note-subtitle">나만의 독서 노트를 작성해보세요.</p>
-	<div class="note-container">
-            <div class="book-info">
-            	<!--이전으로 가기 버튼-->
-	            <div class="back-button">
-	        		<i class="fas fa-chevron-left" onclick="history.back()"></i>
-	    		</div>
-            	<!--독서 노트 작성 폼 -->
-                <img src="${book.image}" alt="${book.title}" class="book-image" />
+    <c:if test="${not empty bookList}">
+        <c:forEach var="book" items="${bookList}">
+            <div class="note-page">
+                <h1 class="note-title">독서 노트 작성하기</h1>
+                <p class="note-subtitle">나만의 독서 노트를 작성해보세요.</p>
 
-                <div class="book-details">
-                    <h2 class="book-title">${book.title}</h2>
-                    <p class="book-author">${book.author}</p>
+                <div class="note-content">
+                    <!-- 책 이미지 및 정보 -->
+                    <div class="book-info">
+                        <img src="${book.image}" alt="${book.title}" class="book-image" />
+                        <div class="book-details">
+                            <h2 class="book-title">${book.title}</h2>
+                            <p class="book-author">${book.author}</p>
+                        </div>
+                    </div>
+
+                    <!-- 독서 노트 작성 폼 -->
+                    <form id="frm" name="frm" class="note-form">
+                        <div class="input-section">
+                            <!-- 날짜 입력란 나란히 배치 -->
+                            <div class="date-inputs">
+                                <div>
+                                    <label for="bookStartDate">읽기 시작한 날짜</label>
+                                    <input type="date" id="bookStartDate" name="bookStartDate" class="input-text" />
+                                </div>
+                                <div>
+                                    <label for="bookEndDate">마지막으로 읽은 날짜</label>
+                                    <input type="date" id="bookEndDate" name="bookEndDate" class="input-text" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 본문 내용 요약 -->
+                        <label for="noteContent" class="content-label">내용 요약</label>
+                        <textarea id="noteContent" name="noteContent" class="content-textarea"></textarea>
+
+                        <!-- 별점과 태그 선택 -->
+                        <div class="metadata-section">
+						    <div class="star-rating">
+						        <label class="star-label">별점 선택</label> <!-- 별점 선택 레이블 -->
+						        <span class="star" data-value="1"><i class="far fa-star"></i></span>
+						        <span class="star" data-value="2"><i class="far fa-star"></i></span>
+						        <span class="star" data-value="3"><i class="far fa-star"></i></span>
+						        <span class="star" data-value="4"><i class="far fa-star"></i></span>
+						        <span class="star" data-value="5"><i class="far fa-star"></i></span>
+						        <input type="hidden" name="noteRating" class="rating-value" value="0" />
+						    </div>
+						
+						    <div class="tag-section">
+						        <div id="tagSelector" class="tag-selector">태그 선택하기</div>
+						        <input type="hidden" id="selectedTag" name="selectedTag" />
+						    </div>
+						</div>
+
+                        <!-- 공개 여부 및 저장 버튼 -->
+                        <div class="button-section">
+                            <input type="radio" id="noteShowYnY" name="noteShowYn" value="Y" />
+                            <label for="noteShowYnY">공개</label>
+                            <input type="radio" id="noteShowYnN" name="noteShowYn" value="N" />
+                            <label for="noteShowYnN">비공개</label>
+                            <button type="button" id="btn_note_submit" class="btn_note_submit">저장하기</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-
-            <form id="frm" name="frm" class="note-form">
-                <table>
-                <input type="hidden" value="${book.isbn}" id =bookIsbn name="bookIsbn" class="bookIsbn"/>
-                    <tr>
-                        <td>읽기 시작한 날짜</td>
-                        <td><input type="date" id="bookStartDate" name="bookStartDate" class="input-text" /></td>
-                    </tr>
-                    <tr>
-                        <td>마지막으로 읽은 날짜</td>
-                        <td><input type="date" id="bookEndDate" name="bookEndDate" class="input-text" /></td>
-                    </tr>
-                    <tr>
-                        <td>내용 요약</td>
-                        <td><textarea id="noteContent" name="noteContent" class="input-text"></textarea></td>
-                    </tr>
-                    <!-- 별점 추가 -->
-					<tr>
-					    <td>별점</td>
-					    <td>
-					        <div class="star-rating">
-					            <!-- Font Awesome 별 모양 사용 -->
-					            <span class="star" data-value="1"><i class="far fa-star"></i></span>
-					            <span class="star" data-value="2"><i class="far fa-star"></i></span>
-					            <span class="star" data-value="3"><i class="far fa-star"></i></span>
-					            <span class="star" data-value="4"><i class="far fa-star"></i></span>
-					            <span class="star" data-value="5"><i class="far fa-star"></i></span>
-					            <!-- 사용자가 선택한 별점을 숨겨진 input에 저장 -->
-					            <input type="hidden" name="noteRating" class="rating-value" value="0" />
-					        </div>
-					    </td>
-					</tr>
-					<tr>
-					    <td>태그</td>
-					    <td>
-					        <!-- "태그 선택하기" 문구와 선택된 태그 표시 -->
-					        <div id="tagSelector" class="tag-selector">태그 선택하기</div>
-					        <!-- 선택한 태그 값을 저장할 hidden input -->
-					        <input type="hidden" id="selectedTag" name="selectedTag" />
-					    </td>
-					</tr>
-
-					<tr>
-                        <td>공개 여부</td>
-                        <td>
-                            <input type="radio" id="noteShowYn" name="noteShowYn" value="Y" />
-                            <label for="showY">공개</label>
-                            <input type="radio" id="noteShowYn" name="noteShowYn" value="N" />
-                            <label for="showN">비공개</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="button-wrap">
-                            <input type="button" value="등록하기" id = "btn_note_submit" class="btn_note_submit"/>
-                        </td>
-                    </tr>   
-                </table>
-            </form>
-        </div>
-    </c:forEach>
-</c:if>
-
-	
+        </c:forEach>
+    </c:if>
 </body>
 </html>

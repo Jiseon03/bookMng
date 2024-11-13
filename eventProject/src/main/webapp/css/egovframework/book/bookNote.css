@@ -1,148 +1,136 @@
 @charset "UTF-8";
-.note-container {
-    position: relative;
-    max-width: 750px;
+.note-page {
+    width: 60%;
     margin: 0 auto;
-    padding: 25px 25px 5px 25px;
-    border: 2px solid #ddd;
-    border-radius: 10px;   
-    box-sizing : border-box;
+    padding: 20px 40px;  /* 좌우 여백 추가 */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
 }
 
 .note-title {
     text-align: center;
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 26px;
+    margin-bottom: 5px;
 }
 
 .note-subtitle {
     text-align: center;
     font-size: 16px;
-    margin-bottom: 20px;
     color: #666;
+    margin-bottom: 20px;
+}
+
+.note-content {
+    display: flex;
+    flex-direction: column;
 }
 
 .book-info {
     display: flex;
-    justify-content : center;;	
     align-items: center;
-    gap : 50px;
     margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #ddd;
 }
 
 .book-image {
-    width: 120px;
-    height: auto;
-    margin-right: 20px;
-    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    border-radius: 5px;
+    margin-right: 15px;
 }
 
 .book-details {
-	width : 50%;
-}
-
-.book-title {
-	width : 100%;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.book-author {
-    font-size: 16px;
-    color: #666;
-}
-
-.note-form table {
-    width: 100%;
-}
-/* 각 입력 필드의 레이블 스타일 */
-td {
-    padding: 10px 0;
-    font-size: 16px;
-    color: #333;
-    font-weight : bold;
-}
-
-/* 텍스트 입력 필드 스타일 */
-input[type="text"], input[type="password"], input[type="date"] {
-    width: calc(100% - 20px); /* 버튼이나 셀렉트 박스와 같은 요소가 있는 경우 간격 조정 */
-    padding: 12px;
-    margin: 5px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
     font-size: 14px;
-    box-sizing: border-box;
+    color: #333;
+}
+
+.input-section {
+    margin-bottom: 20px;
+}
+
+.date-inputs {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.date-inputs div {
+    flex: 1;
 }
 
 .input-text {
     width: 100%;
-    padding: 8px;
-    margin: 5px 0;
-    border-radius: 5px;
+    padding: 10px;
+    border-radius: 4px;
     border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
-.button-wrap{
-	text-align: right;
-	padding-bottom :20px 0px 0px 0px;
+.content-label {
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.content-textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    resize: vertical;
+}
+
+.metadata-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.tag-section {
+    margin-top: 10px;
+}
+
+.button-section {
+    text-align: left;
+    margin-top: 20px;
 }
 
 .btn_note_submit {
-    padding: 8px 15px;
-    var(--primary-color)
+    background-color: var(--primary-color);
     color: white;
-    border-radius: 3px;
-    border : none;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 14px;
-    text-decoration: none;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 부드러운 전환 효과 */
+    transition: background-color 0.3s ease;
 }
-.btn_note_submit:hover{
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* 그림자 효과 추가 */
-    transform: scale(1.04); /* 이미지 크기 확대 */
+
+.btn_note_submit:hover {
+    background-color: var(--secondary-color);
 }
-.back-button {
-    position: absolute;
-    top: 10px;
-    left: -40px; /* note-container 왼쪽 바깥쪽으로 이동 */
+
+.star-rating .star i {
     font-size: 24px;
+    color: #ccc;
     cursor: pointer;
 }
 
-.back-button i {
-    color: grey; /* 아이콘 색상 */
+.star-rating .star i.selected {
+    color: #ffcc00;
 }
 
-.back-button i:hover {
-    color: #007bff; /* 호버 시 색상 */
-}
-.star i {
-    font-size: 25px;
-    color: #ccc; /* 기본 별 색상 */
-    cursor: pointer;
-}
-
-.star i.fas {
-    color: #ffcc00; /* 선택된 별 색상 */
-}
 .tag-selector {
-    padding: 10px;
+    padding: 8px;
     background-color: #f8f9fa;
     border: 1px solid #ddd;
     border-radius: 5px;
-    cursor: pointer;
-    display: inline-block;
     font-size: 14px;
     color: #333;
+    cursor: pointer;
 }
-
 /* 태그 선택 팝업 스타일 */
 .tag-modal {
     position: fixed;
